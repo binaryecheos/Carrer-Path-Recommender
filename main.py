@@ -6,8 +6,11 @@ import PyPDF2
 from docx import Document
 import json
 import os
-os.environ["GOOGLE_API_KEY"] = "AIzaSyCwhVauKn-EYCaZTSlhn34k0deg13Evay8"
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
 st.set_page_config(page_title="Career Path Recommender", layout="wide")
 
 st.title("🚀 Career Path Recommender")
