@@ -1,1 +1,54 @@
+# Environment variables
 .env
+*.env
+.env.local
+.env.development
+.env.production
+
+# Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Virtual environments
+venv/
+env/
+.venv/
+*.venv/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Streamlit-specific files
+.streamlit/
+.streamlit/secrets.toml
+.streamlit/config.toml
+
+# System files
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# Log and temporary files
+*.log
+*.tmp
+*.cache
+*.bak
+
+# Dependency and build files
+pip-wheel-metadata/
+dist/
+build/
+*.egg-info/
+*.dist-info/
+
+# Project-specific files
+*.pdf  # Exclude temporary resume uploads
+*.docx  # Exclude temporary resume uploads
+*.sqlite  # Exclude any temporary database files
