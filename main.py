@@ -11,6 +11,7 @@ import os
 
 load_dotenv()
 os.environ["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY")
+google_api_key = st.secrets["GOOGLE_API_KEY"]
 st.set_page_config(page_title="Career Path Recommender", layout="wide")
 
 st.title("🚀 Career Path Recommender")
@@ -98,7 +99,7 @@ if uploaded_file:
 
         if resume_text:
             # Use Gemini 1.5 Flash to extract skills
-            llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7)
+            llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7, google_api_key=google_api_key)
             prompt = (
                 "Extract technical and soft skills from the following resume text. "
                 "Return a list of skills as a comma-separated string (e.g., 'Python, Data Analysis, Teamwork'). "
@@ -131,7 +132,7 @@ if submit_quiz:
     }
 
     # Use Gemini to analyze the answers
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7)
+    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7, google_api_key=google_api_key)
     prompt = (
             "Analyze the following quiz answers to determine the user's personality type. "
             "Provide a concise personality type label (e.g., 'Creative Thinker', 'Analytical Strategist', 'Empathetic Leader') "
@@ -151,7 +152,7 @@ if uploaded_file or submit_quiz:
 
     # Use Gemini to generate job and course recommendations
     with st.spinner("Finding jobs and courses..."):
-        llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7)
+        llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7, google_api_key=google_api_key)
 
         prompt = (
             "You are a career advisor. Based on the following skills and personality type, "
@@ -211,7 +212,7 @@ if uploaded_file or submit_quiz:
     st.subheader("🗺 Career Roadmap")
     with st.spinner("Generating roadmap..."):
         # Use Gemini to generate a roadmap
-        llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7)
+        llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7, google_api_key=google_api_key)
         prompt = (
             "Generate a career roadmap in markdown format based on the following skills and personality type. "
             "Include 3-5 steps with timelines (e.g., '1-3 months', '3-6 months') and actionable advice:\n"
@@ -227,7 +228,7 @@ st.markdown("### 💬 Ask anything:")
 user_input = st.text_input("You:", key="chat_input")
 
 if user_input:
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7)
+    llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.7, google_api_key=google_api_key)
     chain = ConversationChain(llm=llm, memory=st.session_state.memory)
     response = chain.run(user_input)
     st.session_state.chat_history.append((user_input, response))
